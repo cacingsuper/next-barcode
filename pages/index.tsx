@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <QRCode  value='tetsetss'/>
+        <QRCode value={token}/>
       </main>
 
       <footer className={styles.footer}>
