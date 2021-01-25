@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div style={{display:'flex',justifyContent:'center',alignItems: "center",padding: '1rem',width:'100vw',resize: 'both'}}>
+        <div style={{display:'flex',justifyContent:'center',alignItems: "center",width:'100vw',resize: 'both'}}>
           <QRCode size={300} value={token} renderAs="svg" includeMargin={true}/>
         </div>
       </main>
@@ -29,8 +29,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Powered by Lamtoro
         </a>
       </footer>
     </div>
