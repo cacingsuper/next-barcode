@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div style={{position: 'relative',padding: '1rem',width:'100vw',backgroundColor:'red'}}>
+        <div style={{display:'flex',justifyContent:'center',alignItems: "center",padding: '1rem',width:'100vw',resize: 'both'}}>
           <QRCode size={300} value={token} renderAs="svg" includeMargin={true}/>
         </div>
       </main>
