@@ -1,22 +1,43 @@
-import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import QRCode from 'qrcode.react'
 import {useRouter,withRouter} from  'next/router'
 import {useState,useEffect} from 'react'
+import Layout from '../components/Layout/Layout'
+import DownloadButton from '../components/Button/Download'
 
-function Home({router}) {
+function Home({router}):JSX.Element {
   const value = router.query.token || 'dannylamtoro'
-  console.log(router.query)
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Barcode | By dannylamtoro</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+  console.log(value)
 
+  const handleDownload = (e) => {
+    let downloadLink = document.createElement('a');
+    downloadLink.setAttribute('download', `${Date.now()}.png`);
+    let canvas = document.getElementById('img-qr') as HTMLCanvasElement;
+    let dataURL = canvas.toDataURL('image/png');
+    let url = dataURL.replace(/^data:image\/png/,'data:application/octet-stream');
+    downloadLink.setAttribute('href', url);
+    downloadLink.click();
+  }
+  return (
+    <Layout>
       <main className={styles.main}>
-        <div style={{display:'flex',justifyContent:'center',alignItems: "center",width:'100vw',resize: 'both'}}>
-          <QRCode size={300} value={value} renderAs="svg" includeMargin={true}/>
+        <div style={{
+          display:'flex',
+          justifyContent:'center',
+          alignItems: "center",
+          width:'auto',
+          resize: 'both',
+          }}>
+          <QRCode
+          id='img-qr' 
+          size={350} 
+          value={value} 
+          renderAs="canvas" 
+          includeMargin={true}
+          />
+        </div>
+        <div className="w-full">
+          <DownloadButton onClick={handleDownload}/>
         </div>
       </main>
 
@@ -29,7 +50,7 @@ function Home({router}) {
           Powered by Lamtoro
         </a>
       </footer>
-    </div>
+    </Layout>
   )
 }
 
