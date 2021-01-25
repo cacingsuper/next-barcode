@@ -3,10 +3,12 @@ import styles from '../styles/Home.module.css'
 import QRCode from 'qrcode.react'
 import {useRouter} from  'next/router'
 import {useState} from 'react'
+import {GetServerSideProps} from 'next'
+import { Interface } from 'readline'
 
 export default function Home() {
   const router = useRouter()
-  const {token}  = router.query
+  const token = router.query.token || 'dannylamtoro'
   console.log(token)  
   return (
     <div className={styles.container}>
@@ -16,7 +18,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <QRCode value={token}/>
+        <div style={{position: 'relative',padding: '1rem',width:'100vw',backgroundColor:'red'}}>
+          <QRCode size={300} value={token} renderAs="svg" includeMargin={true}/>
+        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -32,3 +36,4 @@ export default function Home() {
     </div>
   )
 }
+
