@@ -1,14 +1,12 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import QRCode from 'qrcode.react'
-import {useRouter} from  'next/router'
-import {useState} from 'react'
+import {useRouter,withRouter} from  'next/router'
+import {useState,useEffect} from 'react'
 
-export default function Home() {
-  const router = useRouter()
-  const [value,setValue] = useState('')
-  const token = router.query.token || 'dannylamtoro'
-  console.log(token)  
+function Home({router}) {
+  const value = router.query.token || 'dannylamtoro'
+  console.log(router.query)
   return (
     <div className={styles.container}>
       <Head>
@@ -18,12 +16,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <div style={{display:'flex',justifyContent:'center',alignItems: "center",width:'100vw',resize: 'both'}}>
-          <QRCode size={300} value={token} renderAs="svg" includeMargin={true}/>
-        </div>
-        <div className="">
-          <textarea name="" id="">
-            {token}
-          </textarea>
+          <QRCode size={300} value={value} renderAs="svg" includeMargin={true}/>
         </div>
       </main>
 
@@ -40,3 +33,4 @@ export default function Home() {
   )
 }
 
+export default withRouter(Home)
